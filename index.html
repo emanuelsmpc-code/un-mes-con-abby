@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1 Mes contigo, mi Abii ❤️</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .title-font {
+            font-family: 'Dancing Script', cursive;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: #ff4d94;
+            animation: floatHeart 8s linear infinite;
+            opacity: 0.8;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        @keyframes floatHeart {
+            0% { transform: translateY(100vh) rotate(0deg); }
+            100% { transform: translateY(-100vh) rotate(360deg); }
+        }
+
+        .message {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1.2s ease;
+        }
+
+        .message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* === COLLAGE RESPONSIVO === */
+        .hero-collage {
+            position: relative;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .collage-grid {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 4px;
+            padding: 4px;
+            z-index: 1;
+        }
+
+        .collage-grid img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;           /* Mantiene proporción sin distorsionar */
+            filter: brightness(0.75);
+        }
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.6));
+            z-index: 2;
+        }
+
+        @media (max-width: 768px) {
+            .collage-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(4, 1fr);
+                gap: 3px;
+                padding: 3px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-black min-h-screen overflow-x-hidden">
+
+    <div id="hearts" class="fixed inset-0 pointer-events-none z-10"></div>
+
+    <!-- Pantalla Principal con Collage -->
+    <section id="hero" class="hero-collage flex items-center justify-center relative text-center px-6">
+        
+        <!-- Collage de 4 fotos -->
+        <div class="collage-grid">
+            <img src="/img/fotoone.jpeg" alt="Foto 1">
+            <img src="/img/fototwo.jpeg" alt="Foto 2">
+            <img src="/img/fotothree.jpeg" alt="Foto 3">
+            <img src="/img/fotofour.jpeg" alt="Foto 4">
+        </div>
+
+        <!-- Overlay oscuro -->
+        <div class="overlay"></div>
+
+        <div class="max-w-2xl z-30 relative">
+            <h1 class="title-font text-7xl md:text-8xl text-white mb-4 drop-shadow-2xl">1 Mes</h1>
+            <h2 class="text-5xl md:text-6xl text-pink-200 title-font drop-shadow-2xl">Contigo, mi Abii</h2>
+            <p class="text-2xl text-white mt-8 mb-12 drop-shadow-2xl">Samuel ❤️ Abby</p>
+            
+            <button onclick="abrirCarta()" 
+                    class="bg-white text-rose-600 px-12 py-5 rounded-3xl text-2xl font-medium hover:scale-110 transition-all shadow-2xl flex items-center gap-3 mx-auto">
+                <i class="fa-solid fa-envelope"></i>
+                ABRIR CARTA ❤️
+            </button>
+        </div>
+    </section>
+
+    <!-- Carta -->
+    <section id="carta" class="hidden min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-purple-50 py-20">
+        <div class="max-w-3xl mx-auto px-6">
+            <button onclick="regresar()" 
+                    class="flex items-center gap-2 text-rose-600 hover:text-rose-700 transition-colors mb-8 text-lg font-medium">
+                <i class="fa-solid fa-arrow-left"></i>
+                REGRESAR
+            </button>
+
+            <div class="bg-white/95 backdrop-blur-xl rounded-3xl p-10 md:p-16 shadow-2xl border border-pink-100">
+                <div class="flex justify-center mb-8">
+                    <i class="fa-solid fa-envelope text-7xl text-rose-400"></i>
+                </div>
+                
+                <h2 class="text-4xl title-font text-center text-rose-600 mb-10">Mi carta para ti</h2>
+                
+                <div class="space-y-8 text-lg leading-relaxed text-gray-700">
+                    <p class="message" id="msg1">Abii, mi amor...</p>
+                    <p class="message" id="msg2">Hoy se cumple un mes desde que empezamos esta hermosa relación, muy agradecido con Dios de tenerte en mi vida, quedan cortas las palabras de esta carta con el amor inmenso que te tengo mi niña, eres lo que mas necesitaba en mi vida, de verdad, te amooo con todo mi corazón, gracias por hacer mi vida mas bonita, por demostrarme cada dia lo que es amar a pesar de la distancia, y aunque no te tenga cerca, eres mi ansia por verte cada que se puede, siempre es como una primera vez contigo💗</p>
+                    <p class="message" id="msg3">Gracias por tus besos, tus risas, por ser tan especial y por quererme como me quieres, se que estas pasando por un momento dificil a la fecha en la que te la escribo, pero Dios tiene el control de todas las cosas, siempre recorda que te amo mi niña</p>
+                    <p class="message" id="msg4">Eres mi persona favorita en el mundo entero, y no sabria que hacer sin tí, espero te guste este pequeño detalle, hecho con mucho amor para mi preciosa, y por cierto, bañate<33</p>
+                    <p class="message text-rose-600 font-medium text-right mt-10" id="msg5">
+                        Te amo mucho,<br>
+                        Tu pastelito te quiere mi amor, muaaak❤️
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 6 + 8) + 's';
+            heart.style.fontSize = (Math.random() * 25 + 18) + 'px';
+            document.getElementById('hearts').appendChild(heart);
+            setTimeout(() => heart.remove(), 16000);
+        }
+
+        function showMessages() {
+            const messages = document.querySelectorAll('.message');
+            messages.forEach((msg, i) => {
+                setTimeout(() => {
+                    msg.classList.add('show');
+                }, 600 + (i * 700));
+            });
+        }
+
+        function abrirCarta() {
+            document.getElementById('hero').classList.add('hidden');
+            const carta = document.getElementById('carta');
+            carta.classList.remove('hidden');
+            
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => createHeart(), i * 12);
+            }
+            
+            setTimeout(showMessages, 800);
+        }
+
+        function regresar() {
+            document.getElementById('carta').classList.add('hidden');
+            document.getElementById('hero').classList.remove('hidden');
+        }
+
+        window.onload = () => {
+            // Corazones solo en la carta
+        };
+    </script>
+</body>
+</html>
